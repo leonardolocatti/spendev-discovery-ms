@@ -1,4 +1,4 @@
-name: Publish
+name: Build and publish image
 on:
   push:
     branches:
@@ -32,4 +32,6 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
       - name: Build
-        run: mvn spring-boot:build-image
+        run: mvn spring-boot:build-image -Dspring-boot.build-image.imageName=ghcr.io/${{GITHUB_REPOSITORY}}
+      - name: Push image
+        run: docker push
