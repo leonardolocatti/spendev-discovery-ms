@@ -15,8 +15,11 @@ jobs:
       - name: Setup JDK
         uses: actions/setup-java@v2
         with:
-          distribution: 'zulu'
+          distribution: 'temurin'
           java-version: '11'
+          cache: 'maven'
+      - name: Get version
+        run: echo "PROJECT_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
       - name: Login to GitHub Cotainer Registry
         uses: docker/login-action@v1
         with:
@@ -24,6 +27,6 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build image
-        run: mvn spring-boot:build-image -Dspring-boot.build-image.imageName=ghcr.io/$GITHUB_REPOSITORY
+        run: mvn spring-boot:build-image -Dspring-boot.build-image.imageName=ghcr.io/$GITHUB_REPOSITORY:${{ env.PROJECT_VERSION }}
       - name: Push image
-        run: docker push ghcr.io/$GITHUB_REPOSITORY:latest
+        run: docker push ghcr.io/$GITHUB_REPOSITORY:${{ env.PROJECT_VERSION }}
