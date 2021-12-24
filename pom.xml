@@ -12,7 +12,7 @@
 
   <groupId>br.com.llocatti</groupId>
   <artifactId>spendev-discovery-ms</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.0</version>
   <name>Spendev Discovery Microservice</name>
   <description>Spendev discovery microservice</description>
 
