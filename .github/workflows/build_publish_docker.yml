@@ -1,8 +1,7 @@
 name: Build and Publish Docker image
 on:
-  push:
-    branches:
-      - test_workflow
+  release:
+    types: [ published ]
 jobs:
   build:
     name: Build and Publish
