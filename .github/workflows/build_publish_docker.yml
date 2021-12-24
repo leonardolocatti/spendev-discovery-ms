@@ -26,6 +26,6 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build image
-        run: mvn spring-boot:build-image -Dspring-boot.build-image.imageName=ghcr.io/$GITHUB_REPOSITORY:${{ env.PROJECT_VERSION }}
+        run: mvn spring-boot:build-image -Dspring-boot.build-image.imageName=ghcr.io/$GITHUB_REPOSITORY:$GITHUB_REF
       - name: Push image
-        run: docker push ghcr.io/$GITHUB_REPOSITORY:${{ env.PROJECT_VERSION }}
+        run: docker push ghcr.io/$GITHUB_REPOSITORY:$GITHUB_REF
